@@ -1,1 +1,30 @@
-var tlsopts = require('./');
+var tlsopts = require('./'),
+    assert = require('assert');
+
+assert.ok(typeof tlsopts === 'function');
+assert.ok(typeof tlsopts.sync === 'function');
+
+// Async tests
+var asyncOpts = {random: 'value', key: 'server.key', ca: 'bundle.crt'};
+tlsopts(asyncOpts, function (err) {
+  if (err) {
+    throw err;
+  }
+
+  assert.equal(asyncOpts.random, 'value');
+  assert.ok(asyncOpts.key instanceof Buffer);
+  assert.ok(asyncOpts.ca instanceof Array);
+  assert.ok(asyncOpts.ca.length == 2);
+});
+
+// Sync tests
+var syncOpts = tlsopts.sync({
+  random: 'value',
+  key: 'server.key',
+  ca: 'bundle.crt'
+});
+
+assert.equal(syncOpts.random, 'value');
+assert.ok(syncOpts.key instanceof Buffer);
+assert.ok(syncOpts.ca instanceof Array);
+assert.ok(syncOpts.ca.length == 2);
