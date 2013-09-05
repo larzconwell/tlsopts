@@ -39,7 +39,7 @@ tlsopts(opts, function (err) {
     throw err;
   }
 
-  var server = https.createServer(opts, function (socket) {
+  var server = https.createServer(opts, function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
     res.end('Hello World\n');
   });
