@@ -7,7 +7,7 @@ assert.ok(typeof tlsopts === 'function');
 assert.ok(typeof tlsopts.sync === 'function');
 
 // Async tests
-var asyncOpts = {random: 'value', key: 'server.key', cert: cert, ca: 'bundle.crt'};
+var asyncOpts = {random: 'value', key: 'server.key', cert: cert, ca: ['server.crt', cert]};
 tlsopts(asyncOpts, function (err) {
   if (err) {
     throw err;
@@ -16,8 +16,9 @@ tlsopts(asyncOpts, function (err) {
   assert.equal(asyncOpts.random, 'value');
   assert.ok(asyncOpts.key instanceof Buffer);
   assert.ok(asyncOpts.ca instanceof Array);
-  assert.ok(asyncOpts.cert = cert);
+  assert.ok(asyncOpts.cert === cert);
   assert.ok(asyncOpts.ca.length == 2);
+  assert.ok(asyncOpts.ca[1] === cert);
 });
 
 // Sync tests
