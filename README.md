@@ -6,7 +6,7 @@ Make TLS configuration cleaner.
 ### API
 tlsopts exports a single function with a `sync` method on it.
 
-### tlsopts
+#### tlsopts
 `tlsopts(opts, function (err) {});`
 Parses the given `opts` object into the format accepted by the `tls` module.
 
@@ -17,7 +17,7 @@ The keys `pfx`, `key`, and `cert` can be given a path to get the contents from.
 The key `ca` can be either a single path pointing to a bundle, or an array
 of paths(or `Buffer`s) to get the contents from.
 
-### tlsopts.sync
+#### tlsopts.sync
 `tlsopts.sync(opts)`
 Synchronous alternative to `tlsopts`, it returns the options object.
 
